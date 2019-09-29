@@ -16,4 +16,4 @@ def all_teams():
 
 @teams_bp.route("/state/<state>", methods=['GET'])
 def team_state(state):
-    return team_index_state(state)
+    return jsonify(team_index_state(state))

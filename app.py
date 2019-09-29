@@ -1,7 +1,16 @@
 from flask import Flask
-from teams import teams_bp
+from flask_cors import CORS
 
-app = Flask(__name__)
+def create_app():
+    app = Flask(__name__)
+    CORS(app)
 
-app.register_blueprint(teams_bp)
-app.run(debug=True)
+    if __name__ == 'app':
+        from teams import teams_bp
+        app.register_blueprint(teams_bp)
+        app.run(debug=True)
+
+    return app
+
+
+
