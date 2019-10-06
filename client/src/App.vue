@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app class="blue darken-3">
-      <v-toolbar-title class="headline text-uppercase white--text">
+      <v-toolbar-title class="headline text-uppercase white--text pointer">
         <span class="blue darken-3 display-2" @click="navHome">NBAVue</span>
       </v-toolbar-title>
 
@@ -46,9 +46,17 @@ export default {
     //
   }),
   methods: {
-    navHome: function() {
+    navHome() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
     }
   }
 };
 </script>
+
+<style scoped lang="scss">
+  .pointer {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+</style>

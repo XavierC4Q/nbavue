@@ -1,22 +1,37 @@
 <template>
   <div>
-    <h3>Teams</h3>
-    <section v-if="teams && teams.length">
-        <div v-for="t in teams" :key="t.id">
-            <h2>{{t.full_name}}</h2>
-        </div>
-    </section>
-    <section v-else>
-        <h2>No teams here</h2>
-    </section>
+    <div v-if="teams && teams.length">
+      <h1 class="display-1 text-center">NBA Teams</h1>
+      <v-autocomplete
+        label="Select a Team"
+        :items="teams.map((t) => t.full_name)"
+        @change="selectTeam"
+      ></v-autocomplete>
+      <v-card v-if="currentTeam">
+        <v-card-title class="text-center">{{ currentTeam.full_name }}</v-card-title>
+        <p class="body-1 px-4">City: {{ currentTeam.city }}</p>
+        <p class="body-1 px-4">State: {{ currentTeam.state }}</p>
+        <p class="body-1 px-4">Established: {{ currentTeam.year_founded }}</p>
+      </v-card>
+    </div>
+    <ErrorMessage v-else message="Error fetching NBA teams! Check backend!" />
   </div>
 </template>
 
 <script>
+import ErrorMessage from "@/components/ErrorMessage.vue";
+
 export default {
   name: "Teams",
+  components: {
+    ErrorMessage
+  },
   data() {
-    return { teams: null, url: "http://127.0.0.1:5000/teams/all_teams" };
+    return {
+      teams: null,
+      url: "http://127.0.0.1:5000/teams/all_teams",
+      currentTeam: null
+    };
   },
   async created() {
     try {
@@ -27,6 +42,18 @@ export default {
     } catch (e) {
       console.log("TEAMS ERROR", e);
     }
+  },
+  methods: {
+    selectTeam(teamName) {
+      this.currentTeam = this.teams.find(t => t.full_name === teamName);
+    }
   }
 };
 </script>
+
+
+<style scoped lang="scss">
+.team-item {
+  max-width: fit-content !important;
+}
+</style>

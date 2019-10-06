@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <div>
     <h1 class="title">Welcome to NBAVue</h1>
     <div class="p-2 m-2 text-justify text-wrap body-1">
       <p>
@@ -13,7 +13,7 @@
           updates before I can think about a live tracker.
       </p>
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>
