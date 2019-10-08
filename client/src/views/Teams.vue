@@ -43,6 +43,9 @@ export default {
       console.log("TEAMS ERROR", e);
     }
   },
+  computed: {
+
+  },
   methods: {
     selectTeam(teamName) {
       this.currentTeam = this.teams.find(t => t.full_name === teamName);
