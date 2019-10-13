@@ -24,6 +24,19 @@
 
 <script>
 export default {
-  name: "Header"
+  name: "Header",
+  methods: {
+    navHome() {
+      if (this.$route.fullPath !== "/") this.$router.push("/");
+    }
+  }
 };
 </script>
+
+<style scoped lang="scss">
+.pointer {
+  &:hover {
+    cursor: pointer;
+  }
+}
+</style>

@@ -16,20 +16,24 @@ def get_current_roster(team):
     season_str = '{}-{}'.format(season_start, str(season_end)[2:])
     try:
         team_dict = commonteamroster.CommonTeamRoster(team_id=team, season=season_str).common_team_roster.get_dict()
-        h = team_dict['headers']
+        headers = team_dict['headers']
         players = team_dict['data']
-        roster = [dict(zip(h, player)) for player in players]
+        roster = [dict(zip(headers, player)) for player in players]
 
         return jsonify(roster)
     except:
         return make_response('Team {} not found'.format(team))
 
 
-@players_bp.route('/player/basic_info/<playerId>/<perMode>')
+@players_bp.route('/player/info/<playerId>/<perMode>')
 def basic_player_info(playerId, perMode):
     try:
         player_dict = playerprofilev2.PlayerProfileV2(player_id=playerId, per_mode36=perMode).career_totals_regular_season.get_dict()
-        return jsonify(player_dict)
+        headers = player_dict['headers']
+        data = player_dict['data']
+        player = [dict(zip(headers, d)) for d in data]
+
+        return jsonify(player)
     except:
         return make_response('Player {} not found'.format(playerId))
 

@@ -21,22 +21,6 @@ export default {
   components: {
     Footer,
     Header
-  },
-  data: () => ({
-    //
-  }),
-  methods: {
-    navHome() {
-      window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
-    }
   }
 };
 </script>
-
-<style scoped lang="scss">
-.pointer {
-  &:hover {
-    cursor: pointer;
-  }
-}
-</style>
